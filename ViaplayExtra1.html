@@ -40,13 +40,13 @@
     const ui = video['ui']; 
     const controls = ui.getControls(); 
     const player = controls.getPlayer(); 
-    const sekang = 'https://director.streaming.telia.com/tvm-packager-prod/group3/60b76e87baa9d5ddc9262457/manifest.mpd';
+    const sekang = 'https://live-dash-cdn7-vp.cdn.viaplay.tv/vp/xtra1/xtra1.isml/index.mpd';
     
     player.configure({
         drm: {
             clearKeys: {
                 //   'key-id-in-hex': 'key-in-hex',
-                'c02b1c0a644d5aa4b7176ae585c572dc':'5a7799ea89ea65e3bac9a10684e616bc'
+                '9df8ec5f86995102a6c9987d360b18c7':'bb525f095535fa1ef2fd42f3068afd56'
             }
         }
     });
