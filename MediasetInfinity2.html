@@ -40,13 +40,13 @@
     const ui = video['ui']; 
     const controls = ui.getControls(); 
     const player = controls.getPlayer(); 
-    const sekang = 'https://live03p-seg.msf.cdn.mediaset.net/live/ch-u2/u2-dash-widevine.isml/manifest.mpd'; // italy
+    const sekang = 'https://live.vrtcdn.be/groupc/live/8edf3bdf-7db3-41c3-a318-72cb7f82de66/live.isml/.mpd';
     
     player.configure({
         drm: {
             clearKeys: {
                 //   'key-id-in-hex': 'key-in-hex',
-                '00f9f3c0783536b834b0f0c2bfee80ac':'76b3afbf163f9c3feb6204b8fcf0ff53'
+                'ef4daa3c90333621e4115ff1ca5bfbda':'424c9902fce5a2e7dcbeb37ffc06b906'
             }
         }
     });
