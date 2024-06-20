@@ -40,13 +40,13 @@
     const ui = video['ui']; 
     const controls = ui.getControls(); 
     const player = controls.getPlayer(); 
-    const sekang = 'https://live.vrtcdn.be/groupc/live/8edf3bdf-7db3-41c3-a318-72cb7f82de66/live.isml/.mpd';
+    const sekang = 'https://poc-sky0120.glbcdn.net/Content/Channel/live_0120/DASH/manifest.mpd?da=1&country=BR&accountType=DTH&deviceType=web';
     
     player.configure({
         drm: {
             clearKeys: {
                 //   'key-id-in-hex': 'key-in-hex',
-                'ef4daa3c90333621e4115ff1ca5bfbda':'424c9902fce5a2e7dcbeb37ffc06b906'
+                'db1f45f2c7eb3229a72fccd82b60a6f7':'4e2070595da16f87e6e6459a26be34d6'
             }
         }
     });
