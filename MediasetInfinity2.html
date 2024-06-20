@@ -40,13 +40,13 @@
     const ui = video['ui']; 
     const controls = ui.getControls(); 
     const player = controls.getPlayer(); 
-    const sekang = 'https://nlziet-live.akamaized.net/L6/76fd047c/c427bd9d.isml/.mpd';
+    const sekang = 'https://aws-appeartv-cdn.rikstv.no/rikstv/1/11/dash/TV2_HD/manifest.mpd';
     
     player.configure({
         drm: {
             clearKeys: {
                 //   'key-id-in-hex': 'key-in-hex',
-                '7545f9301bf94e7a9132dccf32920e51':'94fc134c1b1cb1ea9075781417eca48b'
+                'bfb0134de69d76d25b5b4b202df11431':'025915bd3062c4bde44a13916c5bfefe'
             }
         }
     });
