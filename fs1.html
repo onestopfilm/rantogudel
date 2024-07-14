@@ -40,13 +40,14 @@
     const ui = video['ui']; 
     const controls = ui.getControls(); 
     const player = controls.getPlayer(); 
-    const sekang = 'https://proji.glitch.me/https://linear.stvacdn.spectrum.com/LIVE/5239/bpk-tv/00700/drm/manifest.mpd';
+    const sekang = 'https://pe-fa-lp01a.9c9media.com/live/CKVR/p/dash/20000001/a889a00582c22aa9/manifest.mpd';
     
     player.configure({
         drm: {
             clearKeys: {
                 //   'key-id-in-hex': 'key-in-hex',
-                'ff18f095bc835e8d902be9420438729e':'bbfdc8de223e8b33144d5c718f01f58b'
+                'a4f4e148746e46bc401891571abeb0ca':'29598f41d1cca4db6288430ad065f09a',
+		'5eaecc5806202cba6d013a3b02343132':'e4b85f440f4b55a71423e3440787e4e9'
             }
         }
     });
