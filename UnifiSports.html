@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zona Siaran TV</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.3/shaka-player.ui.min.js' crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='assets/styleshaka.css' crossorigin='anonymous'/>
+    <link rel='stylesheet' href='assets/style.css' crossorigin='anonymous'/>
+</head>
+
+<body bgcolor='black' style='margin:0' oncontextmenu='return false' onkeydown='return false' onmousedown='return false'>
+
+    <div id="vidio" data-shaka-player-container style='position:absolute;z-index: -1;top: 0;left: 0;width: 100%; height: 100%;object-fit:fill cover;'>
+        <video autoplay data-shaka-player id='video' poster="img/b.png" style='width:100%;height:100%;'></video>
+        <div class="shaka-controls-container" shown="true">
+            <div class="shaka-scrim-container"></div>
+            <div class="shaka-play-buton-container">
+                <button class="shaka-play-button shaka-no-propagation" ion="pause" aria-abel="Pause"></button>
+		    </div>
+            <div class="shaka-server-side-ad-container"></div>
+            <div class="shaka-bottom-controls shaka-no-propagation">
+                <div class="shaka-ad-controls shaka-hidden">
+                    <div class="shaka-ad-position shaka-hidden">
+                        <span class="shaka-ad-position-span"></span>
+				    </div>
+                    <div class="shaka-ad-counter">
+                        <span class="shaka-ad-counter-span"></span>
+				    </div>
+			    </div>
+                <div class="shaka-controls-button-panel shaka-show-controls-on-mouse-over">
+                    <img src="img/l.png" style='width:15% ;height:15%;' class="shaka-fullscreen-button material-icons-round shaka-tooltip" aria-label="mute">
+			    </div>
+		    </div>
+	    </div>
+    </div>
+
+   <script> 
+   async function init() { 
+    const video = document.getElementById('video'); 
+    const ui = video['ui']; 
+    const controls = ui.getControls(); 
+    const player = controls.getPlayer(); 
+    const sekang = 'https://pop5clustera00de07172379a62d6189.hypp.tv/PLTV/88888888/224/3221227877/3221227877.mpd?rrsip=web.hypp.tv:443&zoneoffset=0&servicetype=1&icpid=&accounttype=1&limitflux=-1&limitdur=-1&accountinfo=pDVeBhPtc549NayvHFA0JHqiwYJ%2FKEP6UdMtjXIjIzrjYyGN4h5HPUHLEk%2FvL80xPjG9KTt82xXCdpGInMoKWMBLe9Ie9rQgSTZ%2FmsUArMht5J0dsgfU28LWZM15p3G2%3A20221124103114%3AUTC%2C10001002142071%2C115.164.56.153%2C20221124103114%2Curn:Huawei:liveTV:XTV54185493%2C10001002142071%2C-1%2C0%2C1%2C%2C%2C2%2CHESA0002%2C%2C%2C2%2C10000104188313%2C0%2C10000103564441%2C798506651%2C%2C%2C2%2C1%2CEND&GuardEncType=2&tenantId=6003&from=5&ocs=2_1.9.62.168_80&hms_devid=1785&mag_hms=1785,1793,1786,1788&it=H4sIAAAAAAAAA0XMQQvCIBiA4X_jUdTPJjt4KoIuEqy6xqd-ycBN0jXo38ci6P4-71Ix0OlgwQtjAoAG2mlJvqe-wwCx0xCVNoE1erpigQXMeZyTK3Fjt2F_l4ILrpTkUrHLtjtmTFZ9S_eaPNU_G6iuYyAb24Ov2DimVCnhMpaZnzO-rzX_kg9sQKxomQAAAA';
+    
+    player.configure({
+        drm: {
+            clearKeys: {
+                //   'key-id-in-hex': 'key-in-hex',
+                'cbb673fb120882354735ed57eeb05b4c':'fe003f7aeec40eb65d20b14edfda2a86'
+            }
+        }
+    });
+
+    window.player = player; 
+    window.ui = ui; 
+    player.addEventListener('error', onPlayerErrorEvent); 
+    controls.addEventListener('error', onUIErrorEvent); 
+    try{await player.load(sekang); 
+    console.log('The video has now been loaded!');} catch (error) {onPlayerError(error);}} 
+
+    function onPlayerErrorEvent(errorEvent) {onPlayerError(event.detail);} 
+    function onPlayerError(error) {console.error('Error code', error.code, 'object', error);} 
+    function onUIErrorEvent(errorEvent) {onPlayerError(event.detail);} 
+    function initFailed(errorEvent) {console.error('Unable to load the UI library!');} 
+    document.addEventListener('shaka-ui-loaded', init); 
+    document.addEventListener('shaka-ui-load-failed', initFailed); 
+
+    </script>
+    
+</html>
