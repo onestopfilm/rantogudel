@@ -40,13 +40,16 @@
     const ui = video['ui']; 
     const controls = ui.getControls(); 
     const player = controls.getPlayer(); 
-    const sekang = 'https://linear301-it-dash1-prd-akg0.cdn13.skycdp.com/016a/31035/FHD/skysport24/master_stereo.mpd'; 
-    
+    const sekang = 'https://live-atv-cdn.izzigo.tv/5/out/u/dash/SKY-SPORTS-24-HD/manifest.mpd'; // Sky Sports Mexico
+                    
     player.configure({
         drm: {
             clearKeys: {
                 //   'key-id-in-hex': 'key-in-hex',
-                '003618ccd7be22b6367207ed8d64d505':'36e97f29ec5ea6126077cc040cc2ceeb'
+                'd8d5823d92a9ef9306a4cc4bd634b4b4': 'df9fbdaa0ef9e905b75f4692f213af19'
+
+
+                // , '2cede23e0a9ad10be42c074329402963': 'f67abdaaf8b967ece70035ed64b07194'
             }
         }
     });
