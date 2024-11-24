@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<body>
+<head>
+    <title>Zona Siaran TV</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <!-- <script src="DPlayer.min.js"></script> -->
+    <script type="text/javascript" src="DPlayerDat.min.js"></script>
+    <script type="text/javascript" src="flv.min.js"></script>
+    <script type="text/javascript" src="hls.min.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+</head>
+
+<body bgcolor='black' style="height: 100%; width: 100%; border: 0; overflow: hidden;">
+    
+    <div id="dplayer" style="position:absolute; height: 100%; width: 100%;"></div>
+
+</body>
+</html>
+
+
+<!--<script src="http://zqjy.info/js/flv.min.js"></script>
+<script src="http://zqjy.info/js/hls.min.js"></script>
+<script src="http://zqjy.info/js/DPlayer.min.js"></script>-->
+<script>
+jd='';
+var ls0=window.localStorage[0];
+if (ls0!=undefined && ls0!='') {
+	a0 = ls0.split("|");
+} else {
+	a0=[];
+}
+var ls1=window.localStorage[1];
+if (ls1!=undefined && ls1!='') {
+	a1 = ls1.split("|");
+} else {
+	a1=[];
+}
+var ls2=window.localStorage[2];
+if (ls2!=undefined && ls2!='') {
+	a2 = ls2.split("|");
+} else {
+	a2=[];
+}
+list='';    
+xx=a0.length-1;
+if (xx>=0) {
+    if (xx>9) {xx=9;}
+    for (i=0; i<=xx; i++) {
+        list=list+'<a href="../tv/'+a1[i]+'&v=1"><div class="namel">'+a0[i]+'</div><div style="float: right;">'+a2[i]+'</div></a><div style="clear: both;"></div>';
+    }    
+}    
+$('#list').html(list);
+$(function(){
+    var url="http://abcnew.site:8880/live/TNwC28ZMED/aG9TWtVfqy/71105.m3u8";
+    let islive;
+    islive = false;
+
+
+        const dp = new DPlayer({
+            container: document.getElementById('dplayer'),
+            autoplay: true,
+            live: false,
+            //screenshot: true,
+            //volume: 0,
+            lang: 'en',
+            logo: 'l.png',
+            video: {
+                url: url,
+                pic: 'b.png',
+                thumbnails: 'l.png',
+                type: 'hls'
+            },
+
+        });
+            dp.on('pause', function () {
+                if (dp.video.currentTime>30) {
+                    $('#loadnow').html('loading...');
+				    $('.loading').fadeIn(1500);
+                }
+                
+            });
+            dp.on('play', function () {
+                if (dp.video.currentTime>1) {
+				    $('.loading').fadeOut(1500);
+                }
+            });  
+             dp.on('waiting', function () {
+                 $('#loadnow').html('loading...');
+            	$('.loading').show();
+            }); 
+            dp.on('canplay', function () {
+                $('.loading').fadeOut(1500);
+                
+            });  
+            k=1;
+            se0=0;
+            c=1;
+			f=0;
+            var timer= setInterval(function(){
+			f=f+1;	
+
+            
+			// ms=$(".dplayer-dtime").html();
+			// if (f==20 && htos("00:"+ms)==0 && $(".dplayer-ptime").html()=="00:00") {
+			// 	$('.loading').fadeOut(1500);
+            //     var qrurl="http://zqjy.info/mp.php?url=NzMwMjY3";
+			// 	makeqr(qrurl); 
+			// 	$("#showqr").show();
+				
+			// }   
+            // if (f==60 && htos("00:"+ms)==0 && $(".dplayer-ptime").html()=="00:00") {
+            //     $("#showqr").fadeOut(1500);
+            //     $('#loadnow').html('loading...');
+            //     $('.loading').fadeIn(1500);
+                
+            // }
+                
+            // sec=dp.video.currentTime;
+            // if (sec-se0>=1) {
+            //     c=c+1;
+            //     se0=sec;
+            // }   
+                
+            // ms=$(".dplayer-dtime").html();
+            // if (htos("00:"+ms)>0 && htos("00:"+ms)<100) { 
+            //     $("#loadnow").html("loading..."+htos("00:"+ms)+"%"); 
+            // } 
+            // if (c==15) {
+			// 	r=dp.video.videoWidth+"x"+dp.video.videoHeight;
+	 			
+			// 	$.ajax({
+			// 		url:"../relink.php?u=730267&n=1&r="+r+"&f="+f,
+			// 		success:function(data){
+			// 		}
+			// 	});
+            //     var myDate = new Date();
+            //     var dt = (myDate.getMonth()+1)+"-"+myDate.getDate();
+            //     var oldid="NzMwMjY3";
+            //     n=a1.indexOf(oldid); 
+            //     if (n>=0) {   
+            //         a0.splice(n,1); 
+            //         a1.splice(n,1);
+            //         a2.splice(n,1);
+            //     }
+            //     a1.unshift(oldid); 
+            //     a0.unshift('Fuji TV NEXT (544p)');
+            //     a2.unshift(dt);    
+            //     ls0=a0.join("|");
+            //     ls1=a1.join("|");
+            //     ls2=a2.join("|");
+            //     window.localStorage[0]=ls0;
+            //     window.localStorage[1]=ls1;
+            //     window.localStorage[2]=ls2;
+            //     list='';    
+            //     xx=a0.length-1;
+            //     if (xx>=0) {
+            //         if (xx>9) {xx=9;}
+            //         for (i=0; i<=xx; i++) {
+            //             list=list+'<a href="../tv/'+a1[i]+'&v=1"><div class="namel">'+a0[i]+'</div><div style="float: right;">'+a2[i]+'</div></a><div style="clear: both;"></div>';
+            //         }    
+            //     }    
+            //     $('#list').html(list); 
+            // }
+            // if (c==150) {
+			// 	$.ajax({
+			// 		url:"../relink.php?u=730267&n=5",
+			// 		success:function(data){
+                    
+
+			// 		}
+			// 	}); 							               
+            //     clearInterval(timer);
+            // }                
+            },1000); 
+    $('.dplayer-mask').css("bottom","unset");
+    $('.dplayer-mask').show();
+    $('.dplayer-mask').html('<div style="position: absolute;top:8px;right:8px;color:#fff;text-shadow: 1px 1px 1px #000;">ZONA SIARAN</div>');     
+})
+
+    // function ch() {
+	// 	$(".show1").hide();
+	// 	$(".show2").show();
+	// }
+// function showmenu(){
+// 	document.getElementById("menu").style="display:black";
+// 	document.getElementById("a1").style="display:none";
+// }
+// function hiddenmenu(){
+// 	document.getElementById("menu").style="animation:hiddenmenu 1s;animation-fill-mode:forwards;";
+
+// 	document.getElementById("a1").style="display:black";	
+// }	
+	    
+</script>
