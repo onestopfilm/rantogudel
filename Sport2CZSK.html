@@ -40,13 +40,13 @@
     const ui = video['ui']; 
     const controls = ui.getControls(); 
     const player = controls.getPlayer(); 
-    const sekang = 'https://mwmpos01.akamaized.net/out/v1/a054e78fe6c7439faec28e9f71b16672/manifest.mpd';
+    const sekang = 'https://dash2.antik.sk/stream/nvidia_sport2/playlist_cenc.mpd';
     
     player.configure({
         drm: {
             clearKeys: {
                 //   'key-id-in-hex': 'key-in-hex',
-                '00c74743daaa4519b2d3d6b6e7a9a89c':'87f7e82f78206a846a85bb214e619ed1'
+                '11223344556677889900112233445566':'4b80724d0ef86bcb2c21f7999d67739d'
             }
         }
     });
