@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="no-referrer">
+  <title>Zona Siaran TV</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      overflow: hidden;
+    }
+
+    .player-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    video {
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+  <div id="player" class="player-container" crossorigin></div>
+  <script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+  <script>
+    var currentLocation = window.location.search;
+    var QWERTYUIOP123 = currentLocation.replace("?url=", "");
+
+    var player = new Clappr.Player({
+      source: QWERTYUIOP123,
+      poster: "b.png",
+      maxBufferLength: 30,
+      autoPlay: true,
+      parentId: '#player',
+      playback: {
+        crossOrigin: 'anonymous',  // atau 'use-credentials' jika dibutuhkan
+        hlsjsConfig: {
+          liveSyncDuration: 3     // Untuk live stream, menurunkan latency
+        }
+      },
+      width: '100%',
+      height: '100%',
+      mute: false,
+      hideVolumeBar: false,
+      autoPlayVisible: 'partial',
+      watermark: 'l.png',
+      position: 'bottom-right',
+      watermarkLink: 'https://zonasiarantv.blogspot.com/'
+    });
+  </script>
+</body>
+</html>
