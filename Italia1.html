@@ -40,13 +40,13 @@
     const ui = video['ui']; 
     const controls = ui.getControls(); 
     const player = controls.getPlayer(); 
-    const sekang = 'https://mwmpos01.akamaized.net/out/v1/9d59f6e5e1f84631a9ebd228739a2d4f/manifest.mpd';
+    const sekang = 'https://live03p-seg.msf.cdn.mediaset.net/live/ch-i1/i1-dash-widevine.isml/manifest.mpd';
     
     player.configure({
         drm: {
             clearKeys: {
                 //   'key-id-in-hex': 'key-in-hex',
-                'c9be41becbf94d169d451b87275d3220':'d8e6327c108a0fda737df0e33b62a0d9'
+                '00f9f3c0783536b8ee91704e23b78016':'bfd04d6f544c9cc4d35cb13ab6778587'
             }
         }
     });
