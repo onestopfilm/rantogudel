@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Player m3u8</title>
+  <style>
+    body { margin: 0; padding: 0; background: #000; }
+    video { width: 100%; height: auto; background: #000; }
+  </style>
+</head>
+<body>
+
+  <video id="video" controls></video>
+
+  <!-- Sisipkan hls.js dari CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <script>
+    const video = document.getElementById('video');
+    const m3u8Url = 'http://exm3u.extraott.com:80/live/ZUL96376/UG4VTW4E/401458779.m3u8';  // ganti dengan URL-mu
+
+    // Cek apakah browser mendukung hls.js
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(m3u8Url);
+      hls.attachMedia(video);
+
+      // Event ketika manifest sudah diparse
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        // otomatis putar (opsional)
+        video.play().catch(err => {
+          console.warn('Auto-play gagal:', err);
+        });
+      });
+
+      // Contoh listener error
+      hls.on(Hls.Events.ERROR, function (event, data) {
+        console.error('HLS error:', event, data);
+      });
+    } 
+    // fallback jika browser sudah mendukung HLS secara native (Safari, iOS)
+    else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = m3u8Url;
+      video.addEventListener('loadedmetadata', function () {
+        video.play().catch(err => {
+          console.warn('Auto-play fallback gagal:', err);
+        });
+      });
+    } else {
+      console.error('Browser ini tidak mendukung HLS (MediaSource tidak tersedia)');
+      // bisa tampilkan pesan ke pengguna
+    }
+  </script>
+
+</body>
+</html>
