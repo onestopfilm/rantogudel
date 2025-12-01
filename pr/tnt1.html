@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Web IPTV Player</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { background:#000; color:#fff; font-family:sans-serif; display:flex; flex-direction:column; align-items:center; padding:20px; }
+    video { width:100%; max-width:900px; background:#111; border-radius:10px; }
+    input, button { padding:10px; font-size:16px; border-radius:6px; margin-top:10px; width:100%; max-width:900px; }
+    #log { margin-top:15px; width:100%; max-width:900px; height:120px; overflow:auto; background:#111; color:#0f0; padding:10px; border-radius:8px; font-size:14px; }
+  </style>
+</head>
+<body>
+
+<h2>HLS IPTV Player (Cloudflare Proxy)</h2>
+
+<input id="url" type="text" value="http://exm3u.extraott.com:80/live/ZUL96376/UG4VTW4E/6202.m3u8">
+
+<button onclick="startStream()">PLAY</button>
+<video id="video" controls autoplay></video>
+
+<pre id="log"></pre>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+
+<script>
+const video = document.getElementById("video");
+const logEl = document.getElementById("log");
+const PROXY_URL = "https://premium.ndrgbpb.workers.dev/"; // <= GANTI INI
+
+function log(msg) {
+  logEl.textContent += msg + "\n";
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+function startStream() {
+  const originalUrl = document.getElementById("url").value.trim();
+  const proxiedURL = `${PROXY_URL}/?url=${encodeURIComponent(originalUrl)}`;
+
+  log(`Using proxy URL:\n${proxiedURL}`);
+
+  if (Hls.isSupported()) {
+    const hls = new Hls({
+      maxBufferLength: 20,
+      enableWorker: true,
+    });
+
+    hls.on(Hls.Events.ERROR, (event, data) => {
+      log(`⚠ ERROR: ${data.type} | ${data.details}`);
+    });
+
+    hls.loadSource(proxiedURL);
+    hls.attachMedia(video);
+
+    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      log("✔ Playlist Loaded — Auto Playing...");
+      video.play();
+    });
+
+  } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+    log("Using Safari native HLS");
+    video.src = proxiedURL;
+    video.play();
+  } else {
+    log("❌ Browser tidak mendukung HLS!");
+  }
+}
+
+// Auto start
+window.onload = () => startStream();
+</script>
+
+</body>
+</html>
